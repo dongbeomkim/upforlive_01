@@ -8,7 +8,7 @@ using static UnityEditor.PlayerSettings;
 
 public class RangeEnemy : MonoBehaviour
 {
-    /* * * * * * * * Å« ¹üÀ§ º¯¼ö ¼±¾ğ * * * * * * * */
+    /* * * * * * * * í° ë²”ìœ„ ë³€ìˆ˜ ì„ ì–¸ * * * * * * * */
     Animator anim;
     Rigidbody2D rigid;
     ParticleSystem hitEffect;
@@ -16,7 +16,7 @@ public class RangeEnemy : MonoBehaviour
     BoxCollider2D CScollider;
 
 
-    /* * * * * * * * ±âº» Ã¼·Â * * * * * * * */
+    /* * * * * * * * ê¸°ë³¸ ì²´ë ¥ * * * * * * * */
     float enemyHP = 10f;
     float maxHP = 10f;
 
@@ -36,7 +36,7 @@ public class RangeEnemy : MonoBehaviour
     }
     
 
-    //°ø°İ Æ®¸®°Å ¿ÀºêÁ§Æ®
+    //ê³µê²© íŠ¸ë¦¬ê±° ì˜¤ë¸Œì íŠ¸
     int attackPower = 2;
 
     public float distance;
@@ -64,7 +64,7 @@ public class RangeEnemy : MonoBehaviour
 
     void Update()
     {
-        Attack();
+        
     }
 
     void FixedUpdate()
@@ -89,6 +89,7 @@ public class RangeEnemy : MonoBehaviour
                 StartCoroutine(fire());
                 currenttime = cooltime;
             }
+            Attack();
         }
         else
         {
@@ -103,7 +104,7 @@ public class RangeEnemy : MonoBehaviour
         anim.SetTrigger("attack");
     }
 
-    /* * * * * * * * ÀÌµ¿ * * * * * * * */
+    /* * * * * * * * ì´ë™ * * * * * * * */
     public int nextMove;
 
     void Move()
@@ -167,7 +168,7 @@ public class RangeEnemy : MonoBehaviour
         }
     }
 
-    /* * * * * * * * ÇÇ°İ * * * * * * * */
+    /* * * * * * * * í”¼ê²© * * * * * * * */
     float KnockBack = 0;
 
     public void TakeDamage(float damage, Vector3 back)
@@ -189,7 +190,7 @@ public class RangeEnemy : MonoBehaviour
         hitEffect.Play();
     }
 
-    //Á×À½
+    //ì£½ìŒ
     void Dead()
     {
         DeadEffect.Play();
@@ -200,7 +201,7 @@ public class RangeEnemy : MonoBehaviour
 
     void ItemDrop()
     {
-        float randomSelect = Random.Range(0.0f, 1.0f);
+        //float randomSelect = Random.Range(0.0f, 1.0f);
 
         //if (randomSelect < 0.1f)
         //{
@@ -222,7 +223,7 @@ public class RangeEnemy : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
+        Gizmos.color = Color.red;
         Gizmos.DrawWireCube(pos.position, boxSize);
     }
 }

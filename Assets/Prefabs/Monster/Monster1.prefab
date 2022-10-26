@@ -336,7 +336,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   pos: {fileID: 2126738864906483420}
-  boxSize: {x: 1.1, y: 1.1}
+  boxSize: {x: 1.2, y: 1.2}
 --- !u!1 &7946339804183974863
 GameObject:
   m_ObjectHideFlags: 0

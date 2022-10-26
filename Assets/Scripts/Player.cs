@@ -1,29 +1,21 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro;
-using System.ComponentModel;
-using Unity.VisualScripting;
-using static UnityEditor.ShaderData;
-using UnityEngine.UIElements;
 
 
 public class Player : MonoBehaviour
 {
-    /* * * * * * * * Å« ¹üÀ§ º¯¼ö ¼±¾ğ * * * * * * * */
+    /* * * * * * * * í° ë²”ìœ„ ë³€ìˆ˜ ì„ ì–¸ * * * * * * * */
     Rigidbody2D rigid;
     Animator playerAnim;
     GameObject attackCollison;
     BoxCollider2D boxCollider;
 
-    /* * * * * * * * ¾À ÀÌµ¿ * * * * * * * */
+    /* * * * * * * * ì”¬ ì´ë™ * * * * * * * */
     public int currentMap;
 
-    /* * * * * * * * ÇÃ·¹ÀÌ¾î ±âº» Ã¼·Â ¹× ½ºÅ×¹Ì³ª * * * * * * * */
-    float playerHP = 20f;
+    /* * * * * * * * í”Œë ˆì´ì–´ ê¸°ë³¸ ì²´ë ¥ ë° ìŠ¤í…Œë¯¸ë‚˜ * * * * * * * */
+    public float playerHP = 20f;
     float maxHP = 20f;
 
     public float PlayerHP
@@ -31,15 +23,14 @@ public class Player : MonoBehaviour
         get => playerHP;
         set
         {
-            playerHP = value;
-            if(playerHP <= 0)
+            if(playerHP != value)
             {
-                playerHP = 0;
-                Dead();
-            }
-            else if(playerHP >= maxHP)
-            {
-                playerHP = maxHP;
+                playerHP = value;
+                if(PlayerHP <= 0)
+                {
+                    playerHP = 0;
+                    Dead();
+                }
             }
             playerHP = Mathf.Min(playerHP, maxHP);
         }
@@ -76,7 +67,7 @@ public class Player : MonoBehaviour
     }
 
     
-    /* * * * * * * * È­Æó º¯¼ö, ÇÁ·ÎÆÛÆ¼, µ¨¸®°ÔÀÌÆ® * * * * * * * */
+    /* * * * * * * * í™”í ë³€ìˆ˜, í”„ë¡œí¼í‹°, ë¸ë¦¬ê²Œì´íŠ¸ * * * * * * * */
     int money = 0;
     public int Money
     {
@@ -93,7 +84,7 @@ public class Player : MonoBehaviour
     public System.Action<int> OnMoneyChange;
 
 
-    /* * * * * * * * ÀÎº¥Åä¸® »ı¼º ¹× ÃÊ±âÈ­ * * * * * * * */
+    /* * * * * * * * ì¸ë²¤í† ë¦¬ ìƒì„± ë° ì´ˆê¸°í™” * * * * * * * */
     Inventory inventory;
 
     static Player instance;
@@ -157,14 +148,14 @@ public class Player : MonoBehaviour
     }
 
 
-    /* * * * * * * * °áÁ¤µÈ ¹æÇâÀ¸·Î ÀÌµ¿ * * * * * * * */
+    /* * * * * * * * ê²°ì •ëœ ë°©í–¥ìœ¼ë¡œ ì´ë™ * * * * * * * */
     private void FixedUpdate()
     {
         transform.position = transform.position + (Vector3)inputdir * playerSpeed * Time.fixedDeltaTime;
     }
 
 
-    /* * * * * * * * ¾ç¿· ÀÌµ¿ ¹æÇâ °áÁ¤ * * * * * * * */
+    /* * * * * * * * ì–‘ì˜† ì´ë™ ë°©í–¥ ê²°ì • * * * * * * * */
     PlayerInput playerInput;
 
     Vector2 inputdir;
@@ -178,7 +169,7 @@ public class Player : MonoBehaviour
     private void InputDir(InputAction.CallbackContext obj)
     {
 
-        //¿ŞÂÊ ÀÌµ¿ -1, ¿À¸¥ÂÊ ÀÌµ¿ 1, ¸ØÃã 0
+        //ì™¼ìª½ ì´ë™ -1, ì˜¤ë¥¸ìª½ ì´ë™ 1, ë©ˆì¶¤ 0
         inputdir = obj.ReadValue<Vector2>();
         playerAnim.SetInteger("run", (int)inputdir.x);
 
@@ -194,7 +185,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    /* * * * * * * * Á¡ÇÁ * * * * * * * */
+    /* * * * * * * * ì í”„ * * * * * * * */
     float playerJumpPower = 7f;
     int jumplimited = 0;
 
@@ -202,7 +193,7 @@ public class Player : MonoBehaviour
     {
         jumplimited++;
 
-        //µÑ ´Ù 1·Î ÇÏ¸é 1´Ü Á¡ÇÁ, 2·ÎÇÏ¸é 2´Ü Á¡ÇÁ
+        //ë‘˜ ë‹¤ 1ë¡œ í•˜ë©´ 1ë‹¨ ì í”„, 2ë¡œí•˜ë©´ 2ë‹¨ ì í”„
         if (jumplimited <= 1)
         {
             rigid.AddForce(transform.up * playerJumpPower, ForceMode2D.Impulse);
@@ -212,7 +203,7 @@ public class Player : MonoBehaviour
     }
 
 
-    /* * * * * * * * Á¡ÇÁ È½¼ö ¹× ´êÀ¸¸é Á×´Â ºÎºĞ * * * * * * * */
+    /* * * * * * * * ì í”„ íšŸìˆ˜ ë° ë‹¿ìœ¼ë©´ ì£½ëŠ” ë¶€ë¶„ * * * * * * * */
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -230,7 +221,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    /* * * * * * * * ¾ÆÀÌÅÛ È¹µæ * * * * * * * */
+    /* * * * * * * * ì•„ì´í…œ íšë“ * * * * * * * */
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Item"))
@@ -241,7 +232,7 @@ public class Player : MonoBehaviour
     }
 
 
-    /* * * * * * * * ÀÏ¹İ °ø°İ * * * * * * * */
+    /* * * * * * * * ì¼ë°˜ ê³µê²© * * * * * * * */
     float attackdelay = 0f;
 
     float strength = 3;
@@ -270,7 +261,7 @@ public class Player : MonoBehaviour
         playerInput.Player.Enable();
     }
 
-    //Àåºñ + Ä³¸¯ÅÍ Èû = ÇÕ»ê °ø°İ·Â
+    //ì¥ë¹„ + ìºë¦­í„° í˜ = í•©ì‚° ê³µê²©ë ¥
     public float deal;
 
     public void OnEquip(float sum)
@@ -283,10 +274,10 @@ public class Player : MonoBehaviour
         deal = deal - sum;
     }
 
-    /* * * * * * * * ¿ø°Å¸® °ø°İ ½ºÅ³(¹Ì±¸Çö) * * * * * * * */
+    /* * * * * * * * ì›ê±°ë¦¬ ê³µê²© ìŠ¤í‚¬(ë¯¸êµ¬í˜„) * * * * * * * */
 
 
-    /* * * * * * * * ´ë½¬ ½ºÅ³ °ü·Ã * * * * * * * */
+    /* * * * * * * * ëŒ€ì‰¬ ìŠ¤í‚¬ ê´€ë ¨ * * * * * * * */
     float dashPower = 5f;
     public bool isDash = false;
 
@@ -300,7 +291,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    /* * * * * * * * ÇÇ°İ * * * * * * * */
+    /* * * * * * * * í”¼ê²© * * * * * * * */
     float knockBack = 0f;
 
     public void TakeDamage(int damage, Vector3 back)
@@ -326,7 +317,7 @@ public class Player : MonoBehaviour
         OnDamaged();
     }
 
-    //1ÃÊ ¹«Àû ¹× ¹°¸® ¹ÌÀû¿ë À§ÇØ ·¹ÀÌ¾î º¯°æ
+    //1ì´ˆ ë¬´ì  ë° ë¬¼ë¦¬ ë¯¸ì ìš© ìœ„í•´ ë ˆì´ì–´ ë³€ê²½
     void OnDamaged()
     {
         gameObject.layer = 11;
@@ -339,7 +330,7 @@ public class Player : MonoBehaviour
     }
 
 
-    /* * * * * * * * ´ëÈ­ ¸Å¼­µå * * * * * * * */
+    /* * * * * * * * ëŒ€í™” ë§¤ì„œë“œ * * * * * * * */
     bool isAction = false;
 
     private void SearchNpc(InputAction.CallbackContext _)
@@ -355,11 +346,11 @@ public class Player : MonoBehaviour
         }
         else
         {
-            Debug.Log("´ëÈ­ÇÒ ´ë»óÀÌ ¾ø½À´Ï´Ù....");
+            Debug.Log("ëŒ€í™”í•  ëŒ€ìƒì´ ì—†ìŠµë‹ˆë‹¤....");
         }
     }
 
-    //´ëÈ­(³Ñ°Ü¹ŞÀº id·Î ´ëÈ­ Á¤º¸ Ã£±â
+    //ëŒ€í™”(ë„˜ê²¨ë°›ì€ idë¡œ ëŒ€í™” ì •ë³´ ì°¾ê¸°
     private void SearchData(int index)
     {
         GameManager.Instance.TalkPanel.SetActive(true);
@@ -378,13 +369,13 @@ public class Player : MonoBehaviour
         }
         else
         {
-            Debug.Log("´ëÈ­ÇÒ ´ë»óÀÌ ¾ø½À´Ï´Ù....");
+            Debug.Log("ëŒ€í™”í•  ëŒ€ìƒì´ ì—†ìŠµë‹ˆë‹¤....");
         }
 
         QuestManager.Instance.TalkIndex++;
     }
 
-    /* * * * * * * * ´ÙÀÌ * * * * * * * */
+    /* * * * * * * * ë‹¤ì´ * * * * * * * */
     void Dead()
     {
         playerAnim.SetTrigger("die");

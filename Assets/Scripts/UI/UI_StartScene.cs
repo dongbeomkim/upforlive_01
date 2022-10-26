@@ -8,7 +8,7 @@ public class UI_StartScene : MonoBehaviour
 {
     public GameObject creat;
     public Text[] slotText;
-    public TextMeshProUGUI newPlayerName;
+    public Text newPlayerName;
 
     bool[] savefile = new bool[3];
 
