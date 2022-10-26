@@ -70,7 +70,7 @@ public class Inventory : MonoBehaviour
         playerDefense = transform.GetChild(1).GetChild(7).GetComponent<Text>();
 
         playerName.text = DataManager.instance.nowPlayer.name;
-        //playerAttackPower.text = GameManager.Instance.Player.Strength.ToString();
+        playerAttackPower.text = GameManager.Instance.Player.deal.ToString();
         playerDefense.text = GameManager.Instance.Player.Defense.ToString();
 
         dashicon = transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>();

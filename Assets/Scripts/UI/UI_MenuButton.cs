@@ -9,11 +9,15 @@ public class UI_MenuButton : MonoBehaviour
     public Button MenuPanel, Inventory, ReturnGameButton, GameOverButton;
     GameObject menuPanel;
     GameObject inventory;
+    Text mapName;
+    Scene scene;
 
     private void Awake()
     {
         menuPanel = transform.GetChild(5).gameObject;
         inventory = transform.GetChild(6).gameObject;
+        mapName = transform.GetChild(9).GetComponent<Text>();
+        scene = SceneManager.GetActiveScene();
     }
 
     private void Update()
@@ -44,7 +48,7 @@ public class UI_MenuButton : MonoBehaviour
             }
         }
 
-        
+
         
     }
 
@@ -55,6 +59,11 @@ public class UI_MenuButton : MonoBehaviour
 
         ReturnGameButton.onClick.AddListener(OffMenuPanel);
         GameOverButton.onClick.AddListener(GameExit);
+
+        menuPanel.SetActive(false);
+        inventory.SetActive(false);
+
+        mapName.text = scene.name;
     }
 
     public void OnMenuPanel()

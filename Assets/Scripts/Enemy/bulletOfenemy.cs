@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class bulletOfenemy : MonoBehaviour
+public class BulletOfenemy : MonoBehaviour
 {
 
     float Speed = 3f;

@@ -135,7 +135,7 @@ public class QuestManager : MonoBehaviour
             GameManager.Instance.Player.isDash = true;
 
             GameObject obj = Resources.Load("Item/BasicSmallKnife") as GameObject;
-            Instantiate(obj, transform.position, Quaternion.identity);
+            Instantiate(obj, new Vector3(8,-5,0), Quaternion.identity);
 
             inventory.dashicon.color = new Color(1, 1, 1, 1);
             //GameManager.Instance.Inventory.dashicon.color = new Color(1, 1, 1, 1);
