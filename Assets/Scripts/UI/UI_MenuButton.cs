@@ -12,8 +12,8 @@ public class UI_MenuButton : MonoBehaviour
 
     private void Awake()
     {
-        menuPanel = GameObject.Find("PauseUI");
-        inventory = GameObject.Find("Inventory");
+        menuPanel = transform.GetChild(5).gameObject;
+        inventory = transform.GetChild(6).gameObject;
     }
 
     private void Update()

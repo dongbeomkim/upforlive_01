@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -51,7 +52,6 @@ public class Inventory : MonoBehaviour
     Text playerName;
     Text playerAttackPower;
     Text playerDefense;
-    public float finalattackppower = 0;
 
     private void Awake()
     {
@@ -66,7 +66,7 @@ public class Inventory : MonoBehaviour
         playerDefense = transform.GetChild(1).GetChild(7).GetComponent<Text>();
 
         playerName.text = DataManager.instance.nowPlayer.name;
-        playerAttackPower.text = GameManager.Instance.Player.AttackPower.ToString();
+        playerAttackPower.text = GameManager.Instance.Player.Strength.ToString();
         playerDefense.text = GameManager.Instance.Player.Defense.ToString();
     }
 
@@ -118,7 +118,6 @@ public class Inventory : MonoBehaviour
         //데이터 부분
         equipment.Remove(item);
         eqiupSlot.Item = null;
-        finalattackppower = GameManager.Instance.Player.AttackPower;
         items.Add(item);
         FreshSlot();
 
@@ -128,7 +127,7 @@ public class Inventory : MonoBehaviour
         itemDefense.text = null;
 
         //캐릭터 스탯 UI부분
-        playerAttackPower.text = GameManager.Instance.Player.AttackPower.ToString();
+        playerAttackPower.text = GameManager.Instance.Player.Strength.ToString();
         playerDefense.text = GameManager.Instance.Player.Defense.ToString();
     }
 
@@ -150,8 +149,7 @@ public class Inventory : MonoBehaviour
                 itemDefense.text = item.defense.ToString();
 
                 //캐릭터 스탯 UI부분
-                playerAttackPower.text = (GameManager.Instance.Player.AttackPower + item.power).ToString();
-                finalattackppower = GameManager.Instance.Player.AttackPower + item.power;
+                playerAttackPower.text = (GameManager.Instance.Player.Strength + item.power).ToString();
                 playerDefense.text = (GameManager.Instance.Player.Defense + item.defense).ToString();
             }
             else

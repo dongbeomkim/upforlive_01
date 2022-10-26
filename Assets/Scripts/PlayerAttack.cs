@@ -18,15 +18,15 @@ public class PlayerAttack : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<Enemy>().TakeDamage(player.AttackPower, player.transform.position);
+            collision.GetComponent<Enemy>().TakeDamage(player.Strength, player.transform.position);
         }
         else if (collision.CompareTag("RangeEnemy"))
         {
-            collision.GetComponent<RangeEnemy>().TakeDamage(player.AttackPower, player.transform.position);
+            collision.GetComponent<RangeEnemy>().TakeDamage(player.Strength, player.transform.position);
         }
         else if (collision.CompareTag("Boss"))
         {
-            collision.GetComponent<Boss>().TakeDamage(player.AttackPower, player.transform.position);
+            collision.GetComponent<Boss>().TakeDamage(player.Strength, transform.position);
         }
     }
 }

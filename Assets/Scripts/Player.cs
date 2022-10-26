@@ -8,6 +8,7 @@ using TMPro;
 using System.ComponentModel;
 using Unity.VisualScripting;
 using static UnityEditor.ShaderData;
+using UnityEngine.UIElements;
 
 
 public class Player : MonoBehaviour
@@ -92,6 +93,9 @@ public class Player : MonoBehaviour
     public System.Action<int> OnMoneyChange;
 
 
+    /* * * * * * * * 인벤토리 생성 및 초기화 * * * * * * * */
+    Inventory inventory;
+
     static Player instance;
 
     private void Awake()
@@ -115,14 +119,14 @@ public class Player : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         attackCollison = transform.GetChild(0).gameObject;
         boxCollider = GetComponent<BoxCollider2D>();
+        inventory = FindObjectOfType<Inventory>();
     }
 
-    /* * * * * * * * 인벤토리 생성 및 초기화 * * * * * * * */
-    Inventory inventory;
+    
 
     void Start()
     {
-        inventory = FindObjectOfType<Inventory>();
+        
     }
 
     private void OnEnable()
@@ -241,14 +245,19 @@ public class Player : MonoBehaviour
     float attackdelay = 0f;
 
     float strength = 3;
-
-    float time = 9;
-
-    float attackPower;
-    public float AttackPower => attackPower;
+    public float Strength
+    {
+        get => strength;
+        set
+        {
+            strength = value;
+        }
+    }
 
     float defense = 0;
     public float Defense => defense;
+
+    
 
     private void NormalAttack(InputAction.CallbackContext _)
     {

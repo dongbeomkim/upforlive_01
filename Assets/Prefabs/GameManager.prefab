@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2076257484533950094}
   - component: {fileID: 2076257484533950093}
-  - component: {fileID: 2076257484533950092}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -52,24 +51,6 @@ MonoBehaviour:
   talkButton: {fileID: 560227397514900808}
   SaveGameButton: {fileID: 0}
   menuButton: {fileID: 0}
---- !u!114 &2076257484533950092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2076257484533950095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6919a6664ce17d94a9c93eeae8ef8829, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemDatas:
-  - {fileID: 11400000, guid: d2b43e971d950af419dfde250c630215, type: 2}
-  - {fileID: 11400000, guid: 819b4984aa7aad747bcb421127f00c7e, type: 2}
-  - {fileID: 11400000, guid: 6cb3f27798acc5340b1b725c8dd02ce9, type: 2}
-  - {fileID: 11400000, guid: f162bbf03ebd20f40b818d021c58d3fe, type: 2}
-  - {fileID: 11400000, guid: 0f0e14e81a4848649832464ae4af5800, type: 2}
 --- !u!1 &2076257485031832660
 GameObject:
   m_ObjectHideFlags: 0
