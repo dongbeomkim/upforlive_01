@@ -16,8 +16,6 @@ public class UI_MenuButton : MonoBehaviour
     {
         menuPanel = transform.GetChild(5).gameObject;
         inventory = transform.GetChild(6).gameObject;
-        mapName = transform.GetChild(9).GetComponent<Text>();
-        scene = SceneManager.GetActiveScene();
     }
 
     private void Update()
@@ -48,8 +46,9 @@ public class UI_MenuButton : MonoBehaviour
             }
         }
 
-
-        
+        mapName = transform.GetChild(9).GetComponent<Text>();
+        scene = SceneManager.GetActiveScene();
+        mapName.text = scene.name;
     }
 
     void Start()
@@ -63,7 +62,7 @@ public class UI_MenuButton : MonoBehaviour
         menuPanel.SetActive(false);
         inventory.SetActive(false);
 
-        mapName.text = scene.name;
+        
     }
 
     public void OnMenuPanel()

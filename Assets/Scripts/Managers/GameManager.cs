@@ -47,16 +47,9 @@ public class GameManager : MonoBehaviour
     Player player;
     public Player Player => player;
 
+    public Inventory Inventory { get; private set; }
 
-    Inventory inven;
-    public Inventory Inventory => inven;
-
-    MainCamera mainCamera;
-    public MainCamera MainCamera => mainCamera;
-
-
-
-    private void Awake()
+    void Awake()
     {
         if (instance == null)
         {
@@ -81,6 +74,7 @@ public class GameManager : MonoBehaviour
         SaveGameButton.onClick.AddListener(SaveGame);
         talkText = talkPanel.GetComponentInChildren<TextMeshProUGUI>();
         player = FindObjectOfType<Player>();
+        Inventory = FindObjectOfType<Inventory>();
     }
 
     
@@ -95,7 +89,7 @@ public class GameManager : MonoBehaviour
     {
         if (oldSceneIndex != arg0.buildIndex)
         {
-            oldSceneIndex = arg0.buildIndex; //¿¾³¯ ¾À ÀÎµ¦½º¸¦ Áö±İ ¾À ÀÎµ¦½º·Î º¯°æ
+            oldSceneIndex = arg0.buildIndex; //ì˜›ë‚  ì”¬ ì¸ë±ìŠ¤ë¥¼ ì§€ê¸ˆ ì”¬ ì¸ë±ìŠ¤ë¡œ ë³€ê²½
             
         }
     }
@@ -107,7 +101,7 @@ public class GameManager : MonoBehaviour
 
     void SaveGame()
     {
-        Debug.Log("°ÔÀÓ ÀúÀå ½ÇÇè");
+        Debug.Log("ê²Œì„ ì €ì¥ ì‹¤í—˜");
         DataManager.instance.SaveData();
     }
 }
