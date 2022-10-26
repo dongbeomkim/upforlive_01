@@ -97,5 +97,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3ccd03772e84b94bae790c0c04113dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  center: {x: 0, y: 0}
-  size: {x: 0, y: 0}
+  center: {x: 54.5, y: 2}
+  size: {x: 145, y: 40}

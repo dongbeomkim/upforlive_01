@@ -42,9 +42,10 @@ public class bulletOfenemy : MonoBehaviour
             player.TakeDamage(bulletPower, transform.position);
             Destroy(gameObject);
         }
-        else
-        {
-            
-        }
+    }
+
+    void DestroyBullet()
+    {
+        Destroy(gameObject);
     }
 }

@@ -22,7 +22,7 @@ public class Inventory : MonoBehaviour
     Slot[] slots;
 
 
-    /* * * * * * * * * * 장비슬롯 * * * * * * * * * */
+    /* * * * * * * * * * 장비 슬롯 * * * * * * * * * */
     //장비 아이템을 담을 리스트
     public List<Item> equipment;
 
@@ -33,6 +33,10 @@ public class Inventory : MonoBehaviour
     //StateAndEquipment의 하위에 등록된 슬롯들을 담을 곳
     [SerializeField]
     public EquipmentSlot eqiupSlot;
+
+
+    /* * * * * * * * * * 스킬 이미지 * * * * * * * * * */
+    public Image dashicon;
 
 
     //OnValidate()는 유니티 에디터에서 바로 작동을 하는 역할
@@ -66,8 +70,10 @@ public class Inventory : MonoBehaviour
         playerDefense = transform.GetChild(1).GetChild(7).GetComponent<Text>();
 
         playerName.text = DataManager.instance.nowPlayer.name;
-        playerAttackPower.text = GameManager.Instance.Player.Strength.ToString();
+        //playerAttackPower.text = GameManager.Instance.Player.Strength.ToString();
         playerDefense.text = GameManager.Instance.Player.Defense.ToString();
+
+        dashicon = transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>();
     }
 
     //아이템이 들어오거나 나가면 Slot의 내용을 다시 정리해서 화면에 보여주는 역할
@@ -117,6 +123,7 @@ public class Inventory : MonoBehaviour
     {
         //데이터 부분
         equipment.Remove(item);
+        GameManager.Instance.Player.OffEquip(item.power);
         eqiupSlot.Item = null;
         items.Add(item);
         FreshSlot();
@@ -127,7 +134,7 @@ public class Inventory : MonoBehaviour
         itemDefense.text = null;
 
         //캐릭터 스탯 UI부분
-        playerAttackPower.text = GameManager.Instance.Player.Strength.ToString();
+        playerAttackPower.text = GameManager.Instance.Player.deal.ToString();
         playerDefense.text = GameManager.Instance.Player.Defense.ToString();
     }
 
@@ -141,6 +148,7 @@ public class Inventory : MonoBehaviour
                 //데이터 부분
                 equipment.Add(item);
                 items.Remove(item);
+                GameManager.Instance.Player.OnEquip(item.power);
                 FreshSlot();
 
                 //장비 UI부분
@@ -149,7 +157,7 @@ public class Inventory : MonoBehaviour
                 itemDefense.text = item.defense.ToString();
 
                 //캐릭터 스탯 UI부분
-                playerAttackPower.text = (GameManager.Instance.Player.Strength + item.power).ToString();
+                playerAttackPower.text = (GameManager.Instance.Player.deal).ToString();
                 playerDefense.text = (GameManager.Instance.Player.Defense + item.defense).ToString();
             }
             else

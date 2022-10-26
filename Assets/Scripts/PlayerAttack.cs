@@ -8,9 +8,14 @@ public class PlayerAttack : MonoBehaviour
     /* * * * * * * * 큰 범위 변수 선언 * * * * * * * */
     Player player;
 
-    private void Start()
+    private void Awake()
     {
         player = transform.GetComponentInParent<Player>();
+    }
+
+    private void Start()
+    {
+        
     }
 
     /* * * * * * * * 트리거로 공격 판정 * * * * * * * */
@@ -18,15 +23,17 @@ public class PlayerAttack : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<Enemy>().TakeDamage(player.Strength, player.transform.position);
+            collision.GetComponent<Enemy>().TakeDamage(player.deal, player.transform.position);
         }
         else if (collision.CompareTag("RangeEnemy"))
         {
-            collision.GetComponent<RangeEnemy>().TakeDamage(player.Strength, player.transform.position);
+            collision.GetComponent<RangeEnemy>().TakeDamage(player.deal, player.transform.position);
         }
         else if (collision.CompareTag("Boss"))
         {
-            collision.GetComponent<Boss>().TakeDamage(player.Strength, transform.position);
+            collision.GetComponent<Boss>().TakeDamage(player.deal, transform.position);
         }
     }
+
+    
 }

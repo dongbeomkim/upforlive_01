@@ -33,12 +33,14 @@ public class QuestManager : MonoBehaviour
         set { talkIndex = value; }
     }
 
+    Inventory inventory;
+
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
-            instance.Initialize();
+            Initialize();
             DontDestroyOnLoad(this.gameObject);     // 씬이 변경되더라도 게임 오브젝트가 사라지기 않게 해주는 함수
         }
         else
@@ -60,13 +62,15 @@ public class QuestManager : MonoBehaviour
         //이 함수를 통해서 실행함
         GenerateData();
 
-        //고블린 킬수 체크용 델리게이트
-        CheckKillCount = () => { checkkillcount(); };
+        inventory = FindObjectOfType<Inventory>();
 
-        //보스 킬 체크용 델리게이트
-        BossKillCount = () => { BossskillCount(); };
-
-        CObject = () => { CheckObject(); };
+        ////고블린 킬수 체크용 델리게이트
+        //CheckKillCount = () => { checkkillcount(); };
+        //
+        ////보스 킬 체크용 델리게이트
+        //BossKillCount = () => { BossskillCount(); };
+        //
+        //CObject = () => { CheckObject(); };
     }
 
     //초기화된 questList를 사용하기 위한 함수
@@ -80,7 +84,7 @@ public class QuestManager : MonoBehaviour
 
         questList.Add(30, new QuestData("누구지?", new int[] { 2000 }));
 
-        questList.Add(40, new QuestData("처음 본 지상, 그리고 목표지", new int[] { 2000 }));
+        questList.Add(40, new QuestData("처음 본 지상, 그리고 목적지", new int[] { 2000 }));
     }
 
     public int GetQuestTalkIndex(int id)
@@ -129,8 +133,15 @@ public class QuestManager : MonoBehaviour
         else if (questId == 30 && questActionIndex == 0)
         {
             GameManager.Instance.Player.isDash = true;
-            GameObject obj = GameObject.Find("Book");
-            Destroy(obj);
+
+            GameObject obj = Resources.Load("Item/BasicSmallKnife") as GameObject;
+            Instantiate(obj, transform.position, Quaternion.identity);
+
+            inventory.dashicon.color = new Color(1, 1, 1, 1);
+            //GameManager.Instance.Inventory.dashicon.color = new Color(1, 1, 1, 1);
+
+            GameObject book = GameObject.Find("Book");
+            Destroy(book);
         }
         else if (questId == 40 && questActionIndex == 0)
         {
@@ -141,46 +152,46 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    public void CheckObject()
-    {
-  
-        if (questId == 20  && questActionIndex >= 0)
-        {
-            GameObject obj = GameObject.Find("MechanicNpc");
-            Destroy(obj);
-        }
-        else if (questId == 30 && questActionIndex == 0)
-        {
-            GameObject obj = GameObject.Find("MechanicNpc");
-            Destroy(obj);
-
-            GameManager.Instance.Player.isDash = true;
-            GameObject objj = GameObject.Find("Book");
-            Destroy(objj);
-        }
-        else if (questId == 40 && questActionIndex == 0)
-        {
-            GameObject obj = GameObject.Find("MechanicNpc");
-            Destroy(obj);
-
-            GameManager.Instance.Player.isDash = true;
-            GameObject objj = GameObject.Find("Book");
-            Destroy(objj);
-        }
-        else
-        {
-            Debug.Log("삭제 대상이 없습니다.");
-        }
-    }
-
-    void checkkillcount()
-    {
-        killCount++;
-    }
-
-    void BossskillCount()
-    {
-        bosskillCount++;
-    }
+    //public void CheckObject()
+    //{
+    //
+    //    if (questId == 20  && questActionIndex >= 0)
+    //    {
+    //        GameObject obj = GameObject.Find("MechanicNpc");
+    //        Destroy(obj);
+    //    }
+    //    else if (questId == 30 && questActionIndex == 0)
+    //    {
+    //        GameObject obj = GameObject.Find("MechanicNpc");
+    //        Destroy(obj);
+    //
+    //        GameManager.Instance.Player.isDash = true;
+    //        GameObject objj = GameObject.Find("Book");
+    //        Destroy(objj);
+    //    }
+    //    else if (questId == 40 && questActionIndex == 0)
+    //    {
+    //        GameObject obj = GameObject.Find("MechanicNpc");
+    //        Destroy(obj);
+    //
+    //        GameManager.Instance.Player.isDash = true;
+    //        GameObject objj = GameObject.Find("Book");
+    //        Destroy(objj);
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("삭제 대상이 없습니다.");
+    //    }
+    //}
+    //
+    //void checkkillcount()
+    //{
+    //    killCount++;
+    //}
+    //
+    //void BossskillCount()
+    //{
+    //    bosskillCount++;
+    //}
 
 }

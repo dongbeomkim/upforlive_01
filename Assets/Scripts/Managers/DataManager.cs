@@ -13,11 +13,8 @@ using System.IO;
 
 public class PlayerData
 {
-    //코인, 무기, 위치
+    //이름 저장
     public string name;
-    public int money = 0;
-    public int item;
-    public Transform position;
 }
 
 public class DataManager : MonoBehaviour

@@ -23,8 +23,8 @@ public class Player : MonoBehaviour
     public int currentMap;
 
     /* * * * * * * * 플레이어 기본 체력 및 스테미나 * * * * * * * */
-    float playerHP = 20000f;
-    float maxHP = 20000f;
+    float playerHP = 20f;
+    float maxHP = 20f;
 
     public float PlayerHP
     {
@@ -126,7 +126,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        
+        deal = strength;
     }
 
     private void OnEnable()
@@ -245,19 +245,10 @@ public class Player : MonoBehaviour
     float attackdelay = 0f;
 
     float strength = 3;
-    public float Strength
-    {
-        get => strength;
-        set
-        {
-            strength = value;
-        }
-    }
 
     float defense = 0;
     public float Defense => defense;
 
-    
 
     private void NormalAttack(InputAction.CallbackContext _)
     {
@@ -277,6 +268,19 @@ public class Player : MonoBehaviour
         attackCollison.SetActive(false);
         attackdelay = 0f;
         playerInput.Player.Enable();
+    }
+
+    //장비 + 캐릭터 힘 = 합산 공격력
+    public float deal;
+
+    public void OnEquip(float sum)
+    {
+        deal = strength + sum;
+    }
+
+    public void OffEquip(float sum)
+    {
+        deal = deal - sum;
     }
 
     /* * * * * * * * 원거리 공격 스킬(미구현) * * * * * * * */

@@ -181,6 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentMap: 0
+  deal: 0
   isDash: 0
 --- !u!1 &4274928777502388093
 GameObject:
