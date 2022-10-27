@@ -6,7 +6,7 @@ using static UnityEditor.ShaderData;
 
 public class Boss : MonoBehaviour
 {
-    /* * * * * * * * Å« ¹üÀ§ º¯¼ö ¼±¾ğ * * * * * * * */
+    /* * * * * * * * í° ë²”ìœ„ ë³€ìˆ˜ ì„ ì–¸ * * * * * * * */
     ParticleSystem hitEffect;
     ParticleSystem DeadEffect;
     BoxCollider2D CScollider;
@@ -15,7 +15,7 @@ public class Boss : MonoBehaviour
     Player player;
     Transform target;
 
-    /* * * * * * * * º¸½º ±âº» Ã¼·Â * * * * * * * */
+    /* * * * * * * * ë³´ìŠ¤ ê¸°ë³¸ ì²´ë ¥ * * * * * * * */
     float bossHP = 100f;
     public float maxHP = 100f;
 
@@ -45,7 +45,7 @@ public class Boss : MonoBehaviour
         player = FindObjectOfType<Player>();
     }
 
-    /* * * * * * * * ÀÌµ¿ ¹æÇâ Á¤ÇÏ´Â ÄÚ·çÆ¾ ½ÃÀÛ * * * * * * * */
+    /* * * * * * * * ì´ë™ ë°©í–¥ ì •í•˜ëŠ” ì½”ë£¨í‹´ ì‹œì‘ * * * * * * * */
     void Start()
     {
         StartCoroutine(ChangeMoveDir());
@@ -81,18 +81,18 @@ public class Boss : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, target.position, chasespeed);
 
         }
-        else
+        else if(raycastLeft.collider == null && raycastRight.collider == null)
         {
             Move();
         }
     }
 
-    /* * * * * * * * ÀÌµ¿ * * * * * * * */
+    /* * * * * * * * ì´ë™ * * * * * * * */
     public int nextMove;
 
     IEnumerator ChangeMoveDir()
     {
-        //-1ÀÌ¸é ¿ŞÂÊ, 1ÀÌ¸é ¿À¸¥ÂÊ, 0ÀÌ¸é °¡¸¸È÷
+        //-1ì´ë©´ ì™¼ìª½, 1ì´ë©´ ì˜¤ë¥¸ìª½, 0ì´ë©´ ê°€ë§Œíˆ
         nextMove = Random.Range(-1, 2);
 
         anim.SetInteger("move", nextMove);
@@ -104,7 +104,7 @@ public class Boss : MonoBehaviour
 
     void Move()
     {
-        //nextMoveÀÇ ·£´ı ¼ıÀÚ¿¡ µû¶ó ÀÌµ¿ÇÔ
+        //nextMoveì˜ ëœë¤ ìˆ«ìì— ë”°ë¼ ì´ë™í•¨
         rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
 
         if (nextMove == -1)
@@ -126,10 +126,10 @@ public class Boss : MonoBehaviour
     }
 
 
-    /* * * * * * * * ÀÏ¹İ °ø°İ * * * * * * * */
+    /* * * * * * * * ì¼ë°˜ ê³µê²© * * * * * * * */
     int attackPower = 5;
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.transform.CompareTag("Player"))
         {
@@ -144,7 +144,7 @@ public class Boss : MonoBehaviour
     }
 
 
-    /* * * * * * * * ÇÇ°İ * * * * * * * */
+    /* * * * * * * * í”¼ê²© * * * * * * * */
     float KnockBack = 0;
 
     public void TakeDamage(float damage, Vector3 back)
@@ -165,7 +165,7 @@ public class Boss : MonoBehaviour
         hitEffect.Play();
     }
 
-    /* * * * * * * * ´ÙÀÌ * * * * * * * */
+    /* * * * * * * * ë‹¤ì´ * * * * * * * */
     void Dead()
     {
         DeadEffect.Play();
@@ -174,8 +174,8 @@ public class Boss : MonoBehaviour
         Destroy(gameObject, 0.5f);
     }
 
-    /* * * * * * * * ¾ÆÀÌÅÛ µå¶ø * * * * * * * */
-    //¹«Á¶°Ç ±âº» ´Ü°ËÀ» µå¶ø, ÃßÈÄ ÇÃ·¹ÀÌ¾î ¿ø°Å¸® ÅõÃ´ ½ºÅ³À» À§ÇØ
+    /* * * * * * * * ì•„ì´í…œ ë“œë * * * * * * * */
+    //ë¬´ì¡°ê±´ ê¸°ë³¸ ë‹¨ê²€ì„ ë“œë, ì¶”í›„ í”Œë ˆì´ì–´ ì›ê±°ë¦¬ íˆ¬ì²™ ìŠ¤í‚¬ì„ ìœ„í•´
 
     void ItemDrop()
     {

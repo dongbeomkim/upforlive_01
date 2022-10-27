@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     Animator playerAnim;
     GameObject attackCollison;
     BoxCollider2D boxCollider;
+    AudioSource audioSource;
+
 
     /* * * * * * * * 씬 이동 * * * * * * * */
     public int currentMap;
@@ -111,6 +113,7 @@ public class Player : MonoBehaviour
         attackCollison = transform.GetChild(0).gameObject;
         boxCollider = GetComponent<BoxCollider2D>();
         inventory = FindObjectOfType<Inventory>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     
@@ -248,6 +251,7 @@ public class Player : MonoBehaviour
             attackCollison.SetActive(true);
             attackdelay = 1f;
             playerAnim.SetTrigger("attack");
+            audioSource.Play();
             playerInput.Player.Disable();
             StartCoroutine(Attack1());
         }

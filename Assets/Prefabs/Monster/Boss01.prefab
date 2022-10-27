@@ -640,7 +640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eaf849325380c946ab8c7e2fb0b0247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 60
+  maxHP: 100
   distance: 10
   isLayer:
     serializedVersion: 2
